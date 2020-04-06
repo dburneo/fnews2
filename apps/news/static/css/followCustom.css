@@ -1,0 +1,89 @@
+.fn-brand {
+  background-color: #081331;
+}
+
+.a-login {
+      color: #ffffff;
+      vertical-align: middle;
+  }
+.a-login:hover {
+    color: #ccccff;
+    vertical-align: middle;
+}
+
+/* El código siguiente es para los mensajes en la plantilla */
+.navbar-light .navbar-nav .active>.nav-link, .navbar-light .navbar-nav .nav-link.active, .navbar-light .navbar-nav .nav-link.show, .navbar-light .navbar-nav .show>.nav-link {
+    color: red;
+}
+
+.layout-navbar-fixed .wrapper .sidebar-dark-primary .brand-link:not([class*="navbar"]) {
+    background-color: #081331;
+  }
+/* ============= */  
+
+[class*="sidebar-dark"] .brand-link {
+  border-bottom: 1px solid #ccccff;
+}
+
+/* .layout-navbar-fixed .wrapper .brand-link {
+  height: 87px;
+} */
+
+.font-brand {
+  font-weight: 800;
+}
+/* .user-panel .info {
+  padding-top: 15px;
+} */
+/* .user-panel, .main-block {
+  top: 28px;
+} */
+
+
+/* Si funciona, cambiarlo en el follownews.css original, línea 18387 */
+.btn-app {
+  border-radius: 3px;
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  color: #081331;
+  font-size: 10px;
+  height: 40px;
+  margin: 0 0 0px 0px;
+  min-width: 40px;
+  padding: 6px 5px;
+  position: relative;
+  text-align: center;
+}
+
+/* Lìnea 19978 */
+/* @media (max-width: 576px) {
+  .login-box,
+  .register-box {
+    margin-top: 60px;
+  }
+}
+ */
+
+/* Botones de Redes Sociales */
+.btn-fb-color, .btn-fb-color:hover {
+  background-color: #5071b8;
+  border-color: #5071b8;
+}
+
+.btn-g-color, .btn-g-color:hover {
+  background-color: #ea4335;
+  border-color: #ea4335;
+}
+.btn-tw-color, .btn-tw-color:hover {
+  background-color: #1da1f2;
+  border-color: #1da1f2;
+}
+
+/* link de password olvidado y crear cuenta */
+.a-link-pw {
+  color: #2424c9;
+}
+
+.a-link-pw:hover {
+  color: #6969bd;
+}

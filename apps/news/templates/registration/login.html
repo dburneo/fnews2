@@ -1,0 +1,113 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="google-site-verification" content="" />
+
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="Sitio Follow News.">
+  <meta name="author" content="David Burneo Naraima">
+
+  <!-- OG Meta Tags to improve the way the post looks when you share the page on LinkedIn, Facebook -->
+  <meta property="og:site_name" content="Follow News" /> <!-- website name -->
+  <meta property="og:site" content="http://follows.news/" /> <!-- website link -->
+  <!-- <meta property="og:title" content=""/> title shown in the actual shared post -->
+  <meta property="og:description" content="Applición Web y movil para seguir noticias específicas." />
+  <!-- description shown in the actual shared post -->
+  <!-- <meta property="og:image" content="" /> image link, make sure it's jpg -->
+  <!-- <meta property="og:url" content="" /> where do you want your post to link to -->
+  <!-- <meta property="og:type" content="article" /> -->
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="{% static 'css/fontawesome/css/all.min.css' %}">
+  <link rel="stylesheet" href="{% static 'css/follownews.css' %}">
+  <link rel="stylesheet" href="{% static 'css/followCustom.css' %}">
+
+  <!-- Google Font: Source Sans Pro -->
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+  <!-- Favicon  -->
+  <link rel="icon" href="{% static 'img/favicon.ico' %}">
+  <title>Follow News</title>
+
+</head>
+
+<body class="hold-transition login-page">
+  <div class="login-box">
+    <!-- Brand Logo -->
+    <a href="{% url 'home' %}" class="brand-link fn-brand d-flex justify-content-center">
+      <span class="brand-text font-weight-light"><b class="font-brand">F</b>ollow <b class="font-brand">N</b>ews</span>
+    </a>
+    <!-- /.login-logo -->
+    <div class="card">
+      <div class="card-body login-card-body">
+        <p class="login-box-msg">Iniciar sesión</p>
+  
+        <div class="social-auth-links text-center mb-3">
+          <a href="{% url 'social:begin' 'facebook' %}" class="btn btn-block btn-primary btn-fb-color">
+            <i class="fab fa-facebook mr-2"></i> Ingresar con Facebook
+          </a>
+          <a href="#" class="btn btn-block btn-danger btn-g-color">
+            <i class="fab fa-google-plus-g mr-2"></i> Ingresar con Google+
+          </a>
+          <a href="{% url 'social:begin' 'twitter' %}" class="btn btn-block btn-danger btn-tw-color">
+            <i class="fab fa-twitter mr-2"></i> Ingresar con Twitter
+          </a>
+        </div>
+        <!-- /.social-auth-links -->
+
+        <p>También puedes crear una cuenta con tu correo:</p>
+
+        <form method="post">
+          {% csrf_token %}
+          {{ form.non_field_errors }}
+          <label for="id_username">Email:</label>
+          <div class="input-group mb-3">
+            {{ form.username }}
+          </div>
+          <label for="id_password">Password:</label>
+          <div class="input-group mb-3">
+            {{ form.password }}
+          </div>
+            
+          <div class="row">
+            <!-- <div class="col-7">
+            </div> -->
+            <!-- /.col -->
+            <!-- <div class="col-5"> -->
+            <div class="col-auto">
+              <button type="submit" class="btn btn-primary btn-block a-login">Ingresar</button>
+            </div>
+            <!-- /.col -->
+          </div>
+        </form>
+  
+  
+        <p class="mb-1">
+          <a href="#" class="a-link-pw">Olvide mi password</a>
+        </p>
+        <p class="mb-0">
+          <a href="{% url 'signup' %}" class="text-center a-link-pw">Mantente informado. Regístrate</a>
+        </p>
+      </div>
+      <!-- /.login-card-body -->
+    </div>
+  </div>
+  <!-- /.login-box -->
+
+  <footer class="d-flex justify-content-center">
+    <h5>Hecha con <i class="fab fa-gratipay" style="color: red;"></i> para mantenerte informado.</h5>
+  </footer>
+
+  <!-- REQUIRED SCRIPTS -->
+  <!-- jQuery -->
+  <script src="{% static 'plugins/jquery/jquery.min.js' %}"></script>
+  <!-- Bootstrap -->
+  <script src="{% static 'plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+  <script src="{% static 'js/adminlte.js' %}"></script>
+</body>  

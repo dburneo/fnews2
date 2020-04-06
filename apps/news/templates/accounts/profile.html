@@ -1,0 +1,12 @@
+{% extends 'news/base.html' %}
+
+{% block content %}
+    <h2 style="color: black; text-align: right;">Este es profile</h2>
+    <p style="color: black;">
+        <span>
+            You are signed in as 
+            <strong>{{ user.first_name }} {{user.last_name }}</strong>
+        </span>
+    </p>
+{% endblock content %}
+    
