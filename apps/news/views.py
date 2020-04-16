@@ -3,12 +3,13 @@ from django.contrib.auth.forms import AdminPasswordChangeForm, PasswordChangeFor
 from django.contrib.auth import update_session_auth_hash, login, authenticate, logout
 from django.contrib import messages
 from django.shortcuts import render, redirect
-
+from apps.customuser.forms import SignUpForm
 from social_django.models import UserSocialAuth
+
 
 def signup(request):
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = SignUpForm(request.POST)
         if form.is_valid():
             form.save()
             user = authenticate(
@@ -18,7 +19,7 @@ def signup(request):
             login(request, user)
             return redirect('home')
     else:
-        form = UserCreationForm()
+        form = SignUpForm()
     return render(request, 'registration/signup.html', {'form': form})
 
 # @login_required
@@ -71,4 +72,4 @@ def password(request):
 def profile(request):
     msg = ""
     # return render(request, "profile.html", {'msg': msg}, context_instance=RequestContext(request))
-    return render(request, "accounts/profile.html", {'msg': msg})
+    return render(request, "registration/profile.html", {'msg': msg})

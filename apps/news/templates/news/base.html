@@ -63,7 +63,7 @@
               <a href="#" class="btn btn-app"><i class="fas fa-cog"></i>Agregar medios</a>
               <a href="{% url 'settings' %}" class="btn btn-app"><i class="far fa-bookmark"></i>Settings</a>
               <a href="{% url 'password' %}" class="btn btn-app"><i class="fas fa-newspaper"></i>Change password</a>
-              <a href="{% url 'logout' %}" class="btn btn-app" ><i class="fas fa-user-alt"></i>logout</a>
+              <a href="{% url 'logout' %}" class="btn btn-app" ><i class="fas fa-user-alt"></i>{{ user.first_name }}</a>
             </li>
           {% else %}
             <li>

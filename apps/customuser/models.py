@@ -1,12 +1,21 @@
 from django.db import models
+from django.core.mail import send_mail
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
+from django.contrib.auth import get_user_model
+# from django.contrib.auth.models import User   # Esta línea es para el Profile
 from django.utils import timezone   # Probar a ver si funciona sin esta línea
 from django.utils.translation import gettext_lazy as _  # Probar a ver si funciona sin esta línea
+from django.conf import Settings
+
+# from django.db.models.signals import post_save
+# from django.dispatch import receiver
 
 import uuid
 
 
 class UserManager(BaseUserManager):
+    use_in_migrations = True
+    
     def create_user(self, email, first_name, last_name, password=None,commit=True):
         """
         Creates and saves a User with the given email, first name, last name
@@ -51,8 +60,9 @@ class UserManager(BaseUserManager):
 class User(AbstractBaseUser, PermissionsMixin):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4)
     email = models.EmailField('email address', unique=True)
-    first_name = models.CharField(_('first name'), max_length=30, blank=True)
-    last_name = models.CharField(_('last name'), max_length=150, blank=True)
+    first_name = models.CharField(_('first name'), max_length=60, blank=True)
+    last_name = models.CharField(_('last name'), max_length=60, blank=True)
+    birth_date = models.DateField(null=True, blank=True)
 
     is_active = models.BooleanField(
         _('active'),
@@ -77,7 +87,12 @@ class User(AbstractBaseUser, PermissionsMixin):
     objects = UserManager()
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['first_name', 'last_name']
+    REQUIRED_FIELDS = []
+    # REQUIRED_FIELDS = ['first_name', 'last_name']
+
+    class Meta:
+        verbose_name = _('user')
+        verbose_name_plural = _('users')
 
     def get_full_name(self):
         """
@@ -96,3 +111,15 @@ class User(AbstractBaseUser, PermissionsMixin):
     def has_module_perms(self, app_label):
         "Does the user have permissions to view the app `app_label`?"
         return True
+    
+    def email_user(self, subject, message, from_email=None, **kwargs):
+        '''
+        Sends an email to this User.
+        '''
+        send_mail(subject, message, from_email, [self.email], **kwargs)
+
+# @receiver(post_save, sender=User)
+# def update_user_profile(sender, instance, created, **kwargs):
+#     if created:
+#         User.objects.create_user(user=instance)
+#     instance.user.save()

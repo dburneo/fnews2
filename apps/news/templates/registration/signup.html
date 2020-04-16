@@ -1,16 +1,50 @@
-{% extends 'news/base.html' %}
-
+{% extends 'registration/base.html' %}
+{% load static %}
 
 {% block content %}
-    <h2>Signup</h2>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Signup</button>
-    </form>
-    <br>
-    <p><strong>-- OR --</strong></p>
-    <a href="{% url 'social:begin' 'twitter' %}">Signup with Twitter</a><br>
-    <a href="{% url 'social:begin' 'facebook' %}">Signup with Facebook</a>
+
+    <div class="card">
+        <div class="card-body login-card-body">
+        <p class="login-box-msg">Crear una cuenta</p>
+        <form method="post">
+            {% csrf_token %}
+
+            <div class="social-auth-links text-center mb-1">
+                <a href="{% url 'social:begin' 'facebook' %}" class="btn btn-block btn-primary btn-fb-color">
+                <i class="fab fa-facebook mr-2"></i> Regístrate con Facebook
+                </a>
+                <a href="#" class="btn btn-block btn-danger btn-g-color">
+                <i class="fab fa-google-plus-g mr-2"></i> Regístrate con Google+
+                </a>
+                <a href="{% url 'social:begin' 'twitter' %}" class="btn btn-block btn-danger btn-tw-color">
+                <i class="fab fa-twitter mr-2"></i> Regístrate con Twitter
+                </a>
+                <p style="font-size: smaller;">También puedes crear una cuenta con tu correo:</p>
+            </div>
+            <!-- /.social-auth-links -->
+
+            <div class="input-group mb-3">
+                {% for field in form %}
+                    <dt class="col-sm-4">
+                        {{ field.label_tag }}
+                    </dt>
+                    <dd class="col-sm-8">
+                        {{ field }}
+                        {% if field.help_text %}
+                            <small>{{ field.help_text }}</small>
+                        {% endif %}
+                        {% for error in field.errors %}
+                            <p style="color: red;">{{ error }}</p>
+                        {% endfor %}
+                    </dd>
+                {% endfor %}
+            </div>
+            <div class="col-12">
+                <button type="submit" class="btn btn-primary btn-block a-login">Regístrate</button>
+            </div>
+        </form>
+        <br>
+        <a href="{% url 'login' %}" class="text-center a-link-pw">Ya tengo una cuenta. Ingresar.</a>
+    </div>
 {% endblock content %}
     
