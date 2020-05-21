@@ -1,12 +1,49 @@
 {% extends 'news/base.html' %}
+{% load static %}
 
+<body>
 {% block content %}
-    <h2 style="color: black; text-align: right;">Este es profile</h2>
-    <p style="color: black;">
-        <span>
-            You are signed in as 
-            <strong>{{ user.first_name }} {{user.last_name }}</strong>
-        </span>
-    </p>
+    <h2 class="text-left">Bienvenido, {{ user.first_name }} {{user.last_name }}</h2>
+
+    <form method="POST">
+        {% csrf_token %}
+
+        <div class="row">
+            <div class="col-xs-12">
+                {% if messages %}
+                    <ul class="messages">
+                        {% for message in messages %}
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                {{ message }}
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="input-group mb-3">
+            {% for field in form %}
+                <dt class="col-sm-3">
+                    {{ field.label_tag }}
+                </dt>
+                <dd class="col-sm-9">
+                    {{ field }}
+                    {% for error in field.errors %}
+                        <div class="alert alert-danger">
+                            <strong>{{ error|escape }}</strong>
+                        </div>
+                    {% endfor %}
+                </dd>
+            {% endfor %}
+        </div>
+        <div class="card-body">
+            <button type="submit"  class="btn btn-primary">Guardar</button>
+        </div>
+    </form>
+
 {% endblock content %}
-    
+</body>

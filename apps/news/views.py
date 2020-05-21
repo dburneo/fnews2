@@ -3,8 +3,10 @@ from django.contrib.auth.forms import AdminPasswordChangeForm, PasswordChangeFor
 from django.contrib.auth import update_session_auth_hash, login, authenticate, logout
 from django.contrib import messages
 from django.shortcuts import render, redirect
-from apps.customuser.forms import SignUpForm
+from apps.customuser.forms import SignUpForm, ProfileForm
 from social_django.models import UserSocialAuth
+
+from apps.customuser.models import User
 
 
 def signup(request):
@@ -59,10 +61,12 @@ def password(request):
         if form.is_valid():
             form.save()
             update_session_auth_hash(request, form.user)
-            messages.success(request, 'Your password was successfully updated!')
+            # messages.success(request, 'Your password was successfully updated!')
+            messages.success(request, 'Tu contraseña se ha cambiado correctamente!')
             return redirect('password')
         else:
-            messages.error(request, 'Please correct the error below.')
+            # messages.error(request, 'Please correct the error below.')
+            messages.error(request, 'Favor corregir los siguientes errores.')
     else:
         form = PasswordForm(request.user)
     return render(request, 'registration/password.html', {'form': form})
@@ -70,6 +74,14 @@ def password(request):
 
 @login_required
 def profile(request):
-    msg = ""
-    # return render(request, "profile.html", {'msg': msg}, context_instance=RequestContext(request))
-    return render(request, "registration/profile.html", {'msg': msg})
+    profile = request.user
+    if request.method == 'GET':
+        form = ProfileForm(instance=profile)
+    else:
+        form = ProfileForm(request.POST, instance=profile)
+        if form.is_valid():
+            profile = form.save(commit=False)
+            form.save()
+            messages.success(request, 'Cambios guardados correctamente!')
+        return redirect('profile')
+    return render(request, 'registration/profile.html', {'form': form})

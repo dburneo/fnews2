@@ -25,8 +25,11 @@
         <form method="post">
           {% csrf_token %}
           <div class="row">
-            {{ form.non_field_errors }}
-
+            {% for error in form.non_field_errors %}
+              <div class="alert alert-danger">
+                <strong>{{ error|escape }}</strong>
+              </div>
+            {% endfor %}
             <dt class="col-sm-3">
               <label for="id_username">Email:</label>
             </dt>

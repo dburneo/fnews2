@@ -1,6 +1,5 @@
 from django.db import models
-# from django.core.urlresolvers import reverse_lazy
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from autoslug import AutoSlugField
 
 import uuid

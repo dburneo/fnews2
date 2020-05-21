@@ -60,7 +60,7 @@ class UserManager(BaseUserManager):
 class User(AbstractBaseUser, PermissionsMixin):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4)
     email = models.EmailField('email address', unique=True)
-    first_name = models.CharField(_('first name'), max_length=60, blank=True)
+    first_name = models.CharField(_('first name'), max_length=30, blank=True)
     last_name = models.CharField(_('last name'), max_length=60, blank=True)
     birth_date = models.DateField(null=True, blank=True)
 
@@ -117,9 +117,3 @@ class User(AbstractBaseUser, PermissionsMixin):
         Sends an email to this User.
         '''
         send_mail(subject, message, from_email, [self.email], **kwargs)
-
-# @receiver(post_save, sender=User)
-# def update_user_profile(sender, instance, created, **kwargs):
-#     if created:
-#         User.objects.create_user(user=instance)
-#     instance.user.save()

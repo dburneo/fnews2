@@ -61,9 +61,17 @@
             <li>
               <a href="{% url 'home' %}" class="btn btn-app"><i class="fas fa-home"></i>Inicio</a>
               <a href="#" class="btn btn-app"><i class="fas fa-cog"></i>Agregar medios</a>
-              <a href="{% url 'settings' %}" class="btn btn-app"><i class="far fa-bookmark"></i>Settings</a>
-              <a href="{% url 'password' %}" class="btn btn-app"><i class="fas fa-newspaper"></i>Change password</a>
-              <a href="{% url 'logout' %}" class="btn btn-app" ><i class="fas fa-user-alt"></i>{{ user.first_name }}</a>
+              <!-- <a href="{% url 'settings' %}" class="btn btn-app"><i class="far fa-bookmark"></i>Settings</a> -->
+              <a href="#" class="btn btn-app"><i class="fas fa-newspaper"></i>Seguir</a>
+              <a href="#" class="btn btn-app"><i class="far fa-bookmark"></i>Leer más tarde</a>
+              <a href="#" class="btn btn-app" data-toggle="dropdown"><i class="fas fa-user-alt"></i>{{ user.first_name }}</a>
+              <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                <a href="{% url 'profile' %}" class="dropdown-item">Perfil</a>
+                <div class="dropdown-divider"></div>
+                <a href="{% url 'password' %}" class="dropdown-item">Cambiar contraseña</a>
+                <div class="dropdown-divider"></div>
+                <a href="{% url 'logout' %}" class="dropdown-item">Cerrar Sesión</a>
+              </div>
             </li>
           {% else %}
             <li>
@@ -73,13 +81,6 @@
             {% endif %}
           </ul>
 
-        {% for message in messages %}
-          <!-- <p style="color: {% if message.tags == 'success' %}green{% elif message.tags == 'error' %}red{% endif %}"> -->
-          <p {% if message.tags == 'success' %} style="color: green;" {% elif message.tags == 'error' %} style="color: red;"
-            {% endif %}">
-          </p>
-          {{ message }}
-        {% endfor %}
       </nav>
       <!-- /.navbar -->
 
@@ -121,9 +122,7 @@
         <!-- /.sidebar -->
       </aside>
       
-      
       <!-- Inicio       -->
-      
       
       <!-- Content Wrapper. Contains page content -->
       <div class="content-wrapper">
@@ -140,15 +139,8 @@
         <!-- /.content -->
       </div>
       <!-- /.content-wrapper -->
-
-    
-    
     
       <!-- Fin -->
-
-    
-
-
     
       <a id="back-to-top" href="#" class="btn btn-primary back-to-top" role="button" aria-label="Scroll to top">
         <i class="fas fa-chevron-up"></i>
@@ -157,20 +149,17 @@
     <!-- ./wrapper -->
   {% endblock body %}
 
-  <footer>
-    <hr>
-    <h3 style="text-align: right; color: black;">Este es el footer</h3>
-  </footer>
-
+  {% block extra_body %}
+  
   <!-- REQUIRED SCRIPTS -->
   <!-- jQuery -->
   <script src="{% static 'plugins/jquery/jquery.min.js' %}"></script>
   <!-- Bootstrap -->
   <script src="{% static 'plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
-
+  
   <script src="{% static 'js/adminlte.js' %}"></script>
-
-
+  
+  {% endblock extra_body %}
 </body>
 
 </html>

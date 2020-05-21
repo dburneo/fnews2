@@ -6,6 +6,7 @@ from django.contrib.auth import views as auth_views
 
 from apps.news import views as news_views
 
+
 urlpatterns = [
     path('', news_views.home, name="home"),
     path('login/', auth_views.LoginView.as_view(), name='login'),
